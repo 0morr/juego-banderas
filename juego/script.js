@@ -1,7 +1,7 @@
 const flags = [
-  { src: "C:/Users/mrego/Desktop/juego/banderas/Bandera_nacional_de_España.png", correct: "España", options: ["España", "Francia", "Alemania", "Italia"] },
-  { src: "C:/Users/mrego/Desktop/juego/banderas/Flag_of_France.svg.png", correct: "Francia", options: ["España", "Francia", "Alemania", "Italia"] },
-  { src: "C:/Users/mrego/Desktop/juego/banderas/Flag_of_Germany.svg.png", correct: "Alemania", options: ["España", "Francia", "Alemania", "Italia"] },
+  { src: "./banderas/Bandera_nacional_de_España.png", correct: "España", options: ["España", "Francia", "Alemania", "Italia"] },
+  { src: "./banderas/Flag_of_France.svg.png", correct: "Francia", options: ["España", "Francia", "Alemania", "Italia"] },
+  { src: "./banderas/Flag_of_Germany.svg.png", correct: "Alemania", options: ["España", "Francia", "Alemania", "Italia"] },
   // Añade más banderas y opciones aquí
 ];
 
