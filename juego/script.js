@@ -103,14 +103,16 @@ function updateScore(points) {
   const scoreDisplay = document.getElementById('score');
   const currentScore = score;
   const newScore = currentScore + points;
-  let animationInterval = setInterval(() => {
+
+  // Animación fluida para la puntuación
+  const animationInterval = setInterval(() => {
     if (score < newScore) {
       score++;
       scoreDisplay.textContent = `Puntuación: ${score}`;
     } else {
       clearInterval(animationInterval);
     }
-  }, 30); // Velocidad de la animación
+  }, 20); // Velocidad de la animación
 }
 
 // Función para actualizar la barra de progreso
@@ -138,6 +140,11 @@ function restartGame() {
   document.getElementById('menu').classList.remove('hidden');
   document.getElementById('result').classList.add('hidden');
   document.getElementById('progressBar').style.width = '0';
+
+  // Resetear las variables y elementos del juego
+  score = 0;
+  roundsPlayed = 0;
+  updateScore(0);
 }
 
 // Función para mezclar opciones
