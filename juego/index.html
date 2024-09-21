@@ -14,26 +14,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .container {
       background-color: #fff;
-      padding: 40px;
+      padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 15px;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 22px;
       margin-bottom: 20px;
       color: #333;
     }
 
     .flag {
-      width: 200px;
+      width: 100%;
+      max-width: 300px;
+      height: auto;
       margin: 20px auto;
       border: 2px solid #ddd;
       border-radius: 10px;
@@ -46,13 +50,13 @@
 
     .options {
       display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 10px;
+      margin-top: 10px;
     }
 
     button {
-      padding: 12px 18px;
+      padding: 12px;
       font-size: 16px;
       color: white;
       background-color: #007BFF;
@@ -60,7 +64,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
-      min-width: 120px;
+      width: 100%;
     }
 
     button:hover {
@@ -74,17 +78,17 @@
       color: #333;
     }
 
-    /* Estilo del menú de dificultad */
+    /* Menú de dificultad */
     .menu {
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      gap: 15px;
       margin-bottom: 30px;
-      position: relative;
     }
 
     .menu button {
-      padding: 12px 24px;
-      font-size: 16px;
+      padding: 14px;
+      font-size: 18px;
       color: white;
       background-color: #28a745;
       border-radius: 5px;
@@ -94,26 +98,7 @@
 
     .menu button:hover {
       background-color: #218838;
-      transform: scale(1.1);
-    }
-
-    .menu .tooltip {
-      position: absolute;
-      background-color: #333;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 5px;
-      display: none;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    .menu button:hover+.tooltip {
-      display: block;
-    }
-
-    .hidden {
-      display: none;
+      transform: scale(1.05);
     }
 
     /* Barra de progreso */
@@ -143,19 +128,45 @@
     /* Botón de jugar de nuevo */
     #restartBtn {
       display: none;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 20px;
+      font-size: 18px;
       background-color: #28a745;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       margin-top: 20px;
-      transition: background-color 0.3s ease;
+      width: 100%;
     }
 
     #restartBtn:hover {
       background-color: #218838;
+    }
+
+    /* Estilos específicos para dispositivos móviles */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 18px;
+      }
+
+      .flag {
+        max-width: 250px;
+      }
+
+      button {
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      #restartBtn {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .menu button {
+        padding: 12px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -166,18 +177,9 @@
   <div class="container">
     <!-- Menú para elegir dificultad -->
     <div class="menu" id="menu">
-      <div>
-        <button onclick="startGame('easy')">Fácil</button>
-        <span class="tooltip">2 opciones</span>
-      </div>
-      <div>
-        <button onclick="startGame('medium')">Medio</button>
-        <span class="tooltip">4 opciones</span>
-      </div>
-      <div>
-        <button onclick="startGame('hard')">Difícil</button>
-        <span class="tooltip">6 opciones</span>
-      </div>
+      <button onclick="startGame('easy')">Fácil</button>
+      <button onclick="startGame('medium')">Medio</button>
+      <button onclick="startGame('hard')">Difícil</button>
     </div>
 
     <!-- Título del juego -->
