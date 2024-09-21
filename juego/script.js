@@ -5,12 +5,7 @@ let score = 0; // Puntuación del jugador
 let roundsPlayed = 0;
 const maxRounds = 10; // Número de rondas por juego
 
-// Configuración de niveles de dificultad
-const levels = {
-  easy: 2,
-  medium: 4,
-  hard: 6,
-};
+const levels = { easy: 2, medium: 4, hard: 6 };
 
 // Obtener datos de todos los países usando la API, excluyendo la bandera de Israel
 async function fetchCountries() {
@@ -19,7 +14,7 @@ async function fetchCountries() {
   countries = data
     .filter(country => country.translations.spa?.common !== "Israel")
     .map(country => ({
-      name: country.translations.spa?.common || country.name.common,  // Nombre en español o común
+      name: country.translations.spa?.common || country.name.common,
       flag: country.flags.svg,
     }));
 }
@@ -30,7 +25,6 @@ function startGame(selectedDifficulty) {
   score = 0;
   roundsPlayed = 0;
 
-  // Esconder el menú y mostrar el juego
   document.getElementById('menu').classList.add('hidden');
   document.getElementById('gameTitle').classList.remove('hidden');
   document.getElementById('flagImg').classList.remove('hidden');
@@ -39,7 +33,7 @@ function startGame(selectedDifficulty) {
   document.querySelector('.progress-container').classList.remove('hidden');
   document.getElementById('score').classList.remove('hidden');
 
-  updateScore(0);  // Iniciar puntuación en 0
+  updateScore(0);
   loadFlag();
 }
 
@@ -53,10 +47,8 @@ function loadFlag() {
   const randomIndex = Math.floor(Math.random() * countries.length);
   currentFlag = countries[randomIndex];
 
-  // Cambiar la imagen de la bandera
   document.getElementById("flagImg").src = currentFlag.flag;
 
-  // Obtener opciones basadas en la dificultad
   const numOptions = levels[difficulty];
   let options = [currentFlag.name];
 
@@ -67,16 +59,14 @@ function loadFlag() {
     }
   }
 
-  // Mezclar las opciones
   options = shuffle(options);
 
-  // Mostrar las opciones en los botones
   const optionsContainer = document.querySelector('.options');
-  optionsContainer.innerHTML = ''; // Limpiar opciones anteriores
+  optionsContainer.innerHTML = '';
   options.forEach(option => {
     const button = document.createElement('button');
     button.textContent = option;
-    button.onclick = () => checkAnswer(option);
+    button.onclick = () => checkAnswer(button, option);
     optionsContainer.appendChild(button);
   });
 
@@ -85,34 +75,29 @@ function loadFlag() {
 }
 
 // Función para verificar la respuesta seleccionada
-function checkAnswer(selectedAnswer) {
+function checkAnswer(button, selectedAnswer) {
   const result = document.getElementById("result");
 
   if (selectedAnswer === currentFlag.name) {
     result.textContent = "¡Correcto!";
-    updateScore(10); // Aumentar puntuación por respuesta correcta
+    button.classList.add('correct');
+    updateScore(10);
   } else {
     result.textContent = `Incorrecto. Era ${currentFlag.name}`;
+    button.classList.add('incorrect');
   }
 
-  setTimeout(loadFlag, 2000); // Cargar la siguiente bandera después de 2 segundos
+  setTimeout(() => {
+    button.classList.remove('correct', 'incorrect');
+    loadFlag();
+  }, 1500);
 }
 
 // Función para actualizar la puntuación con animación
 function updateScore(points) {
   const scoreDisplay = document.getElementById('score');
-  const currentScore = score;
-  const newScore = currentScore + points;
-
-  // Animación fluida para la puntuación
-  const animationInterval = setInterval(() => {
-    if (score < newScore) {
-      score++;
-      scoreDisplay.textContent = `Puntuación: ${score}`;
-    } else {
-      clearInterval(animationInterval);
-    }
-  }, 20); // Velocidad de la animación
+  score += points;
+  scoreDisplay.textContent = `Puntuación: ${score}`;
 }
 
 // Función para actualizar la barra de progreso
@@ -128,20 +113,15 @@ function endGame() {
   result.textContent = `¡Juego terminado! Puntuación final: ${score}`;
   document.getElementById('flagImg').classList.add('hidden');
   document.querySelector('.options').classList.add('hidden');
-
-  // Mostrar el botón de reiniciar
   document.getElementById('restartBtn').style.display = 'block';
 }
 
 // Función para reiniciar el juego
 function restartGame() {
-  // Esconder el botón de reinicio y mostrar el menú de dificultad
   document.getElementById('restartBtn').style.display = 'none';
   document.getElementById('menu').classList.remove('hidden');
   document.getElementById('result').classList.add('hidden');
   document.getElementById('progressBar').style.width = '0';
-
-  // Resetear las variables y elementos del juego
   score = 0;
   roundsPlayed = 0;
   updateScore(0);
@@ -155,6 +135,9 @@ function shuffle(array) {
   }
   return array;
 }
+
+// Cargar los datos iniciales
+window.onload = fetchCountries;
 
 // Cargar los datos iniciales
 window.onload = fetchCountries;
