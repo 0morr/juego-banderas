@@ -5,207 +5,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Juego de Adivinar Banderas</title>
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 15px;
-    }
-
-    h1 {
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    .flag {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      margin: 20px auto;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    .flag:hover {
-      transform: scale(1.05);
-    }
-
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    button {
-      padding: 12px;
-      font-size: 16px;
-      color: white;
-      background-color: #007BFF;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s;
-      width: 100%;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #333;
-    }
-
-    /* Menú de dificultad */
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .menu button {
-      padding: 14px;
-      font-size: 18px;
-      color: white;
-      background-color: #28a745;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .menu button:hover {
-      background-color: #218838;
-      transform: scale(1.05);
-    }
-
-    /* Barra de progreso */
-    .progress-container {
-      background-color: #ddd;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 20px 0;
-      height: 15px;
-      width: 100%;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background-color: #007bff;
-      width: 0;
-      transition: width 0.4s ease;
-    }
-
-    /* Puntuación */
-    #score {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    /* Botón de jugar de nuevo */
-    #restartBtn {
-      display: none;
-      padding: 12px 20px;
-      font-size: 18px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
-    }
-
-    #restartBtn:hover {
-      background-color: #218838;
-    }
-
-    /* Estilos específicos para dispositivos móviles */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 18px;
-      }
-
-      .flag {
-        max-width: 250px;
-      }
-
-      button {
-        padding: 10px;
-        font-size: 16px;
-      }
-
-      #restartBtn {
-        font-size: 16px;
-        padding: 10px;
-      }
-
-      .menu button {
-        padding: 12px;
-        font-size: 16px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo CSS -->
 </head>
 
 <body>
-
-  <!-- Contenedor principal -->
-  <div class="container">
-    <!-- Menú para elegir dificultad -->
-    <div class="menu" id="menu">
-      <button onclick="startGame('easy')">Fácil</button>
-      <button onclick="startGame('medium')">Medio</button>
-      <button onclick="startGame('hard')">Difícil</button>
-    </div>
-
-    <!-- Título del juego -->
-    <h1 id="gameTitle" class="hidden">Adivina la bandera</h1>
-
-    <!-- Barra de progreso -->
-    <div class="progress-container hidden">
-      <div id="progressBar" class="progress-bar"></div>
-    </div>
-
-    <!-- Puntuación -->
-    <div id="score" class="hidden">Puntuación: 0</div>
-
-    <!-- Imagen de la bandera -->
-    <img id="flagImg" class="flag hidden" src="" alt="Bandera">
-
-    <!-- Opciones de respuesta -->
-    <div class="options hidden"></div>
-
-    <!-- Resultado -->
-    <p id="result" class="hidden"></p>
-
-    <!-- Botón para jugar de nuevo -->
-    <button id="restartBtn" onclick="restartGame()">Jugar de nuevo</button>
+  <h1>Adivina la Bandera</h1>
+  <div id="menu">
+    <button onclick="startGame('easy')">Fácil</button>
+    <button onclick="startGame('medium')">Medio</button>
+    <button onclick="startGame('hard')">Difícil</button>
   </div>
 
+  <div id="gameTitle" class="hidden">¿A qué país pertenece esta bandera?</div>
+  <img id="flagImg" class="flag hidden" src="" alt="Bandera">
+
+  <div class="options hidden"></div>
+
+  <div id="score" class="hidden">Puntuación: 0</div>
+
+  <div class="progress-container hidden">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <p id="result" class="hidden"></p>
+
+  <button id="restartBtn" onclick="restartGame()">Jugar de nuevo</button>
+
+  <!-- Enlace al archivo JavaScript -->
   <script src="script.js"></script>
 </body>
 
